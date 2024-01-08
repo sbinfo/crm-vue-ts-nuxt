@@ -7,6 +7,8 @@
 		--background: #020817;
 		--foreground: #f8fafc;
 
+		--sidebar: rgb(8 47 73);
+
 		--muted: #1e293b;
 		--muted-foreground: #94a3b8;
 
@@ -16,8 +18,8 @@
 		--card: #020817;
 		--card-foreground: #f8fafc;
 
-		--border: #1e293b;
-		--input: #1e293b;
+		--border: #f8fafc;
+		--input: #f8fafc;
 
 		--primary: #f8fafc;
 		--primary-foreground: #0f172a;
