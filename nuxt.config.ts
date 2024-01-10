@@ -3,9 +3,9 @@ export default defineNuxtConfig({
 	devtools: { enabled: false },
 	css: ["~/assets/css/main.css"],
 	modules: [
-		"@nuxt/image",
 		"@pinia/nuxt",
 		"@nuxtjs/tailwindcss",
+		"@nuxt/image",
 		"nuxt-icon",
 		"shadcn-nuxt",
 		[
@@ -28,4 +28,5 @@ export default defineNuxtConfig({
 		prefix: "",
 		componentDir: "./components/ui",
 	},
+	plugins: ["~/plugins/vue-query.ts"],
 })
