@@ -1,19 +1,20 @@
-<script lang="ts" setup>
-import { useKanbanQuery } from "@/components/kanban/useKanbanQuery"
-import { convertCurrency } from "@/lib/convertCurrency"
+<script setup>
 import dayjs from "dayjs"
-import type { ICard, IColumn } from "~/components/kanban/kanban.types"
+import CreateDeal from "~/components/kanban/CreateDeal.vue"
+import { useKanbanQuery } from "~/components/kanban/useKanbanQuery"
+import { convertCurrency } from "~/lib/convertCurrency"
 
 useHead({
 	title: "Home | CRM System",
 })
 
-const dragCardRef = ref<ICard | null>(null)
-const sourceColumnRef = ref<IColumn | null>(null)
+// const dragCardRef = (ref < ICard) | (null > null)
+// const sourceColumnRef = (ref < IColumn) | (null > null)
 const { data, isLoading, refetch } = useKanbanQuery()
-
-console.log(data.value)
 </script>
+
+<!-- TODO: Create deal -->
+<!-- TODO: DND Card -->
 
 <template>
 	<div class="p-10">
@@ -27,10 +28,13 @@ console.log(data.value)
 						<div class="rounded bg-slate-700 py-1 px-5 mb-2 text-center">
 							{{ column.name }}
 						</div>
+
+						<CreateDeal :refetch="refetch" :status="column.id" />
+
 						<Card
 							v-for="card in column.items"
 							:key="card.id"
-							class="mb-3"
+							class="mb-5"
 							draggable="true"
 						>
 							<CardHeader role="button">
@@ -40,7 +44,8 @@ console.log(data.value)
 								}}</CardDescription>
 							</CardHeader>
 							<CardContent class="text-sm"
-								>Company: {{ card.companyName }}
+								><div>Company</div>
+								{{ card.companyName }}
 							</CardContent>
 							<CardFooter>{{
 								dayjs(card.$createdAt).format("DD MMMM YYYY")
