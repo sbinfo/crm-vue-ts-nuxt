@@ -3,6 +3,7 @@ import { KANBAN_DATA } from "@/components/kanban/kanban.data"
 import { DB } from "@/lib/appwrite"
 import type { IDeal } from "@/types/deals.types"
 import { useQuery } from "@tanstack/vue-query"
+import type { IColumn } from "./kanban.types"
 
 export function useKanbanQuery() {
 	//TODO: Kanban queries
@@ -10,7 +11,11 @@ export function useKanbanQuery() {
 		queryKey: ["deals"],
 		queryFn: () => DB.listDocuments(DB_ID, COLLECTION_DEALS),
 		select(data) {
-			const newBoard = [...KANBAN_DATA]
+			const newBoard: IColumn[] = KANBAN_DATA.map(column => ({
+				...column,
+				items: [],
+			}))
+
 			const deals = data.documents as unknown as IDeal[]
 
 			for (const deal of deals) {
@@ -26,8 +31,6 @@ export function useKanbanQuery() {
 					})
 				}
 			}
-
-			console.log(newBoard)
 
 			return newBoard
 		},
